@@ -1,0 +1,22 @@
+TreeNode* Solution::solve(TreeNode* root) { 
+    
+    if(!root) 
+        return root;
+//leaf node
+    if(!root->left && !root->right) 
+        return root;
+
+    root->left = solve(root->left);
+    root->right = solve(root->right);
+
+
+//agr half node h... to uske next node se directly override krna h half node ko...
+
+    if(!root->left)
+        return solve(root->right);
+    if(!root->right)
+        return solve(root->left);
+
+
+    return root;   
+}
