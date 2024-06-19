@@ -1,0 +1,55 @@
+-------- BFS / level order traversal approach -----------------
+
+vector<int> Solution::solve(TreeNode* A, int B) {
+        queue<pair<TreeNode*, vector<int>>> q;
+            vector<int> v;
+            q.push({A, v});
+            
+            while(!q.empty())
+            {
+                TreeNode* curr= q.front().first;
+                vector<int> temp= q.front().second;
+                
+                temp.push_back(curr->val);
+                
+                if(curr->val == B)
+                    return temp;
+                
+                q.pop();
+                
+                if(curr->left)
+                    q.push({curr->left, temp});
+                if(curr->right)
+                    q.push({curr->right, temp});
+            }
+}
+
+
+
+---------- recursive approach --------------------------
+
+bool possible(TreeNode* A, vector<int>& ans, int B)
+{
+    if(!A)
+        return false;
+    
+    ans.push_back(A->val);
+    if(A->val == B)
+        return true;
+    if(possible(A->left, ans, B) || possible(A->right, ans, B))
+        return true;
+    
+    ans.pop_back();
+    
+    return false;
+    
+}
+
+vector<int> Solution::solve(TreeNode* A, int B) {
+    
+    vector<int> ans;
+    possible(A, ans, B);
+    
+    return ans;
+    
+}
