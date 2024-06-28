@@ -1,0 +1,14 @@
+ vector<int> deg(n, 0);
+        long ans= 0, cost= 1;
+
+        for(auto i: roads)
+        {
+            deg[i[0]]++;
+            deg[i[1]]++;
+        }
+        
+        sort(deg.begin(), deg.end());
+        for(auto x: deg)
+            ans+= x * (cost++);
+        
+        return ans;
