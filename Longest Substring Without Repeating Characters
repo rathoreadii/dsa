@@ -1,0 +1,15 @@
+int l= 0, r= 0, len= 0, maxLen= 0;
+vector<int> v(256, -1);
+
+while(r < s.size())
+{
+    if(v[s[r]] != -1 && v[s[r]] >= l)
+        l= v[s[r]] + 1;
+    
+    len= r - l + 1;
+    maxLen= max(maxLen, len);
+    v[s[r]]= r;
+    r++;
+}
+
+return maxLen;
