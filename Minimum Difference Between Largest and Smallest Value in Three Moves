@@ -1,0 +1,17 @@
+int minDifference(vector<int>& nums) {
+
+        int n= nums.size();
+        if(n <= 4)
+            return 0;
+
+        sort(nums.begin(), nums.end());
+
+        int minDiff= INT_MAX;
+        minDiff= min(minDiff, nums[n-4] - nums[0]);//cahnging the largest 3 numbers
+        minDiff= min(minDiff, nums[n-3] - nums[1]);//changing the largest 2 numbers and 1 samllest number
+        minDiff= min(minDiff, nums[n-2] - nums[2]);//changing the largest number and 2 smallest numbers
+        minDiff= min(minDiff, nums[n-1] - nums[3]);//changing the samllest 3 numbers
+
+        return minDiff;
+        
+    }
