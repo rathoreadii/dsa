@@ -1,0 +1,18 @@
+int getPairsCount(const vector<int>& arr, int k) {
+        // code here
+        unordered_map<int, int> freqMap;
+        int count= 0;
+        
+        for(int i=0; i< arr.size(); i++)
+        {
+            int curr= arr[i];
+            int comp= k-curr;
+            
+            if(freqMap.find(comp) != freqMap.end())
+                count+= freqMap[comp];
+            
+            freqMap[curr]++;
+        }
+        
+        return count;
+    }
