@@ -1,0 +1,31 @@
+#include <unordered_map>
+
+string subSet(int a1[], int a2[], int n, int m)
+{
+    unordered_map<int, int> fm;
+    
+    for(int i= 0; i<n; i++)
+        fm[a1[i]]++;
+    
+    for(int i= 0; i<m; i++)
+    {
+        if(fm[a2[i]] > 0)
+            fm[a2[i]]--;
+        else
+            return "No";
+    }
+    
+    return "Yes";
+    
+}
+
+
+
+string isSubset(int a1[], int a2[], int n, int m) {
+    
+    if(n < m)
+        return "No";
+    
+    return subSet(a1, a2, n, m);
+    
+}
