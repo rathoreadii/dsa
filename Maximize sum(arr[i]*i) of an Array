@@ -1,0 +1,12 @@
+int Maximize(int a[],int n)
+    {
+        // Complete the function
+        sort(a, a+n);
+        long long ans= 0;
+        const unsigned int M= 1000000007;
+        
+        for(int i= 0; i<n; i++)
+            ans+= (a[i]*i) % M;
+        
+        return ans%M ;
+    }
