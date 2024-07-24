@@ -1,0 +1,25 @@
+string longestCommonPrefix(vector<string> arr) {
+        // your code here
+        
+        if(arr.empty())
+            return "";
+        
+        string res= arr[0];
+        
+        for(int i=1; i<arr.size(); i++)
+        {
+            string curr= arr[i];
+            int j= 0;
+            
+            while(j<curr.size() && j<res.size() && res[j] == curr[j])
+                j++;
+            
+            res= res.substr(0,j);
+            
+            if(res.empty())
+                return "-1";
+        }
+        
+        return res;
+        
+    }
