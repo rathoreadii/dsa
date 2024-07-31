@@ -1,0 +1,23 @@
+    int smallestSubWithSum(int x, vector<int>& arr) {
+        // Your code goes here
+        
+        int n= arr.size();
+        int s= 0;
+        int currSum= 0;
+        int minLen= n+1;
+        
+        for(int e= 0; e<n; e++)
+        {
+            currSum+= arr[e];
+            
+            while(currSum > x)
+            {
+                minLen= min(minLen, e-s+1);
+                currSum-= arr[s];
+                s++;
+            }
+        }
+        
+        return (minLen == n+1)? 0: minLen;
+        
+    }
