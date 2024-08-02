@@ -1,0 +1,16 @@
+ int minSwaps(vector<int>& nums) {
+
+        int t1= accumulate(nums.begin(), nums.end(), 0);
+        int n= nums.size();
+        int currT1= accumulate(nums.begin(), nums.begin()+t1, 0);
+        int mx= currT1;
+
+        for(int i= t1; i< n+t1; i++)
+        {
+            currT1+= nums[i % n] - nums[(i-t1+n) % n];
+            mx= max(mx, currT1);
+        }
+
+        return t1-mx;
+        
+    }
