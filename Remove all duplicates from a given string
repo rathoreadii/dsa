@@ -1,0 +1,19 @@
+string removeDuplicates(string str) {
+	    // code here
+	    
+	    string ans= "";
+	    int n= str.length();
+	    unordered_map<char, bool> m;
+	    
+	    for(char c: str)
+	    {
+	        if(m.find(c) == m.end())
+	        {
+	            ans+= c;
+	            m[c]= true;
+	        }
+	    }
+	    
+	    return ans;
+	    
+	}
