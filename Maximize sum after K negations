@@ -1,0 +1,67 @@
+ void updatedArray(long long int a[], int n, int k, int ind)
+    {
+        if(ind == -1)
+        {
+            if(k & 1)
+            {
+                a[0]*= -1;
+            }
+            
+            return;
+        }
+        
+        
+        if(ind < k)
+        {
+            while(ind >= 0)
+            {
+                a[ind]*= -1; 
+                ind--;
+                k--;
+            }
+            
+            if(k & 1)
+            {
+                sort(a, a+n);
+                a[0]*= -1;
+            }
+            
+            return;
+        }
+        
+        else
+        {
+            for(int i=0; i<k; i++)
+                a[i]*= -1;
+            
+            return;
+        }
+    }
+    
+    
+    
+    long long int maximizeSum(long long int a[], int n, int k)
+    {
+        // Your code goes here
+        
+        sort(a, a+n);
+        int ind= -1;
+        
+        for(int i= 0; i<n; i++)
+        {
+            if(a[i] < 0)
+                ind= i;
+            else
+                break;
+        }
+        
+        long long ans= 0;
+        
+        updatedArray(a, n, k, ind);
+        
+        for(int i= 0; i<n; i++)
+            ans+= a[i];
+        
+        return ans;
+        
+    }
