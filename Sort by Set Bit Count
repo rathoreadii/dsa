@@ -1,0 +1,27 @@
+int setBit(int x)
+    {
+        return bitset<32>(x).count();
+    }
+    
+    
+    void sortBySetBitCount(int arr[], int n)
+    {
+        // Your code goes here
+        
+        vector<pair<int, int>> pArr(n);
+        pArr.reserve(n);
+        
+        for(int i= 0; i<n; i++)
+            pArr.push_back({arr[i], setBit(arr[i])});
+        
+        stable_sort(pArr.begin(), pArr.end(), [this](const pair<int, int>& a, const pair<int, int>& b)
+        {
+            return a.second > b.second;
+        });
+        
+        for(int i= 0; i<n; i++)
+            arr[i]= pArr[i].first;
+        
+        return;
+        
+    }
