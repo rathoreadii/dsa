@@ -1,0 +1,20 @@
+int maximizeTheCuts(int n, int x, int y, int z)
+    {
+        //Your code here
+        vector<int> p(n+1, -1);
+        p[0]= 0;
+        
+        for(int i=1; i<=n; i++)
+        {
+            if(i >= x && p[i-x] != -1)
+                p[i]= max(p[i], p[i-x]+1);
+            
+            if(i >= y && p[i-y] != -1)
+                p[i]= max(p[i], p[i-y]+1);
+            
+            if(i >= z && p[i-z] != -1)
+                p[i]= max(p[i], p[i-z]+1);
+        }
+        
+        return p[n] == -1? 0:p[n];
+    }
