@@ -1,0 +1,28 @@
+vector<int> Solution::solve(vector<int> &A, int B) {
+    
+    priority_queue<int, vector<int>, greater<int>> qp;
+    
+    for(auto i: A)
+    {
+        if(qp.size() < B)
+            qp.push(i);
+        else
+        {
+            if(i > qp.top())
+            {
+                qp.pop();
+                qp.push(i);
+            }
+        }
+    }
+    
+    vector<int> ans;
+    while(!qp.empty())
+    {
+        ans.push_back(qp.top());
+        qp.pop();
+    }
+    
+    return ans;
+    
+}
