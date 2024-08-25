@@ -1,0 +1,19 @@
+int Solution::solve(vector<int> &A, int B) {
+    
+    priority_queue<int> pq;
+    int cost= 0;
+    
+    for(auto i: A)
+        pq.push(i);
+    
+    while(B--)
+    {
+        int temp= pq.top();
+        cost+= temp;
+        pq.pop();
+        pq.push(--temp);
+    }
+    
+    return cost;
+    
+}
