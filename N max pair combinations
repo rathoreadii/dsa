@@ -1,0 +1,45 @@
+typedef pair<int, pair<int, int>> heapNode;
+
+
+vector<int> Solution::solve(vector<int> &A, vector<int> &B) {
+    
+    vector<int> result;
+    int n= A.size();
+    
+    sort(A.begin(), A.end(), greater<int>());
+    sort(B.begin(), B.end(), greater<int>());
+    
+    priority_queue<heapNode> maxHeap;
+    set<pair<int, int>> visited;
+    
+    maxHeap.push({A[0] + B[0], {0, 0}});
+    visited.insert({0,0});
+    
+    while(n-- > 0 && !maxHeap.empty())
+    {
+        heapNode top= maxHeap.top();
+        maxHeap.pop();
+        
+        int sum= top.first;
+        int i= top.second.first;
+        int j= top.second.second;
+        
+        result.push_back(sum);
+        
+        if(i+1 < A.size() && visited.find({i+1, j}) == visited.end())
+        {
+            maxHeap.push({A[i+1] + B[j], {i+1, j}});
+            visited.insert({i+1, j});
+        }
+        
+        if(j+1 < B.size() && visited.find({i, j+1}) == visited.end())
+        {
+            maxHeap.push({A[i] + B[j+1], {i, j+1}});
+            visited.insert({i, j+1});
+        }
+        
+    }
+    
+    return result;
+    
+}
