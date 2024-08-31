@@ -1,0 +1,46 @@
+int merge(vector<int> &A, int left, int mid, int right)
+{
+    vector<int> lArr(A.begin() + left, A.begin() + mid+1);
+    vector<int> rArr(A.begin() + mid+1, A.begin() + right+1);
+    
+    int i=0, j= 0, k= left;
+    int c= 0;
+    
+    while(i < lArr.size() && j < rArr.size())
+    {
+        if(lArr[i] <= rArr[j])
+            A[k++]= lArr[i++];
+        else
+        {
+            A[k++]= rArr[j++];
+            c+= lArr.size() - i;    
+        }
+    }
+    
+    while(i < lArr.size())
+        A[k++]= lArr[i++];
+    
+    while(j < rArr.size())
+        A[k++]= rArr[j++];
+    
+    return c;
+}
+
+int msCount(vector<int> &A, int left, int right)
+{
+    int count= 0;
+    
+    if(left < right)
+    {
+        int mid= left + (right - left) / 2;
+        
+        count+= msCount(A, left, mid);
+        count+= msCount(A, mid+1, right);
+        count+= merge(A, left, mid, right);
+    }
+    return count;
+}
+
+int Solution::countInversions(vector<int> &A) {
+    return msCount(A, 0, A.size()-1);
+}
