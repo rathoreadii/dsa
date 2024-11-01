@@ -1,0 +1,23 @@
+int Solution::solve(string A) {
+    
+    const int MOD= 1e9 + 7;
+    string vowels= "aeiou";
+    int vow= 0, con= 0, ans= 0;
+    
+    for(char i: A)
+    {
+        if(vowels.find(i) != string::npos)
+        {
+            ans= (ans + con) % MOD;
+            vow++;
+        }
+        else
+        {
+            ans= (ans + vow) % MOD;
+            con++;
+        }
+    }
+    
+    return ans;
+    
+}
