@@ -1,0 +1,40 @@
+class Solution {
+  public:
+    // Function to determine if array arr can be split into three equal sum sets.
+    vector<int> findSplit(vector<int>& arr) {
+        // code here
+        
+        int totalSum= 0;
+        vector<int> ans;
+        
+        for(int x: arr)
+            totalSum+= x;
+        
+        
+        // if not divisible by 3, arr cant be devided into 3 equal parts..
+        if(totalSum % 3 != 0)
+            return {-1, -1};
+        
+        int tar= totalSum/3;
+        
+        int parts= 0;
+        int temp= 0;
+        for(int i=0; i<arr.size(); i++)
+        {
+            temp+= arr[i];
+            if(temp == tar)
+            {
+                parts++;
+                temp= 0;
+                if(parts < 3)
+                    ans.push_back(i);
+            }
+        }
+        
+        // if we dont get the third part of the split
+        if(parts < 3)
+            return {-1, -1};
+        
+        return ans;
+    }
+};
