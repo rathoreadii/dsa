@@ -1,0 +1,32 @@
+string Solution::addBinary(string A, string B) {
+    
+    int i= A.size()-1;
+    int j= B.size()-1;
+    
+    string ans= "";
+    int carr= 0;
+    
+    while(i >= 0 || j >= 0 || carr > 0)
+    {
+        int sum= carr;
+        
+        if(i >= 0)
+        {
+            sum+= A[i] - '0';
+            i--;
+        }
+        
+        if(j >= 0)
+        {
+            sum+= B[j] - '0';
+            j--;
+        }
+        
+        ans+= (sum % 2) + '0';
+        carr= sum/2;
+    }
+    
+    reverse(ans.begin(), ans.end());
+    return ans;
+    
+}
