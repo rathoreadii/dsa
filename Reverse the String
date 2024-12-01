@@ -1,0 +1,44 @@
+string Solution::solve(string A) {
+    
+    int n= A.size();
+    int i= 0, j=0;
+    
+    //counting leading spaces
+    while(i < n && A[i] == ' ')
+        i++;
+    
+    while(i < n)
+    {
+        //moving words left for removing spaces
+        while(i<n && A[i] != ' ')
+            A[j++]= A[i++];
+        
+        //looking for extra spaces in between the words
+        while(i<n && A[i] == ' ')
+            i++;
+        
+        //adding single space between the words
+        if(i<n)
+            A[j++]= ' ';
+    }
+    
+    //resizing the string after removing extra spaces
+    A.resize(j);
+    
+    //reversing whole sentence
+    reverse(A.begin(), A.end());
+        
+    i= 0, j= 0;
+    
+    //reversing each word in place
+    for(i =0; i<= A.size(); i++)
+    {
+        if(i == A.size() || A[i] == ' ')
+        {
+            reverse(A.begin()+j, A.begin()+i);
+            j= i+1; //move to next word
+        }
+    }
+    
+    return A; 
+}
