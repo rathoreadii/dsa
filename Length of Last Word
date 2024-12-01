@@ -1,0 +1,21 @@
+int Solution::lengthOfLastWord(const string A) {
+    
+    int n= A.size();
+    int len= 0;
+    
+    if(A == " " || n == 0)
+        return 0;
+    
+    for(int i= n-1; i>= 0; i--)
+    {
+        if(A[i] == ' ')
+            continue;
+        
+        len++;
+        if(A[i-1] == ' ' || i == 0)
+            return len;
+    }
+    
+    return 0;
+    
+}
