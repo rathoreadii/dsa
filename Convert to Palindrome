@@ -1,0 +1,39 @@
+int checkPalin(string A, int i, int j)
+{
+    string temp1= A;
+    temp1.erase(i, 1);
+    string rev= temp1;
+    reverse(rev.begin(), rev.end());
+    
+    if(temp1 == rev)
+        return 1;
+    
+    string temp2= A;
+    temp2.erase(j, 1);
+    string rev2= temp2;
+    reverse(rev2.begin(), rev2.end());
+    
+    if(temp2 == rev2)
+        return 1;
+        
+    return 0;
+}
+
+int Solution::solve(string A) {
+    
+    int i= 0, j= A.size() -1;
+    
+    while(i <= j)
+    {
+        if(A[i] == A[j])
+        {
+            i++;
+            j--;
+        }
+        else
+            return checkPalin(A, i, j);
+    }
+    
+    return 1;
+    
+}
