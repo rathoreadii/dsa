@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<bool> isArraySpecial(vector<int>& nums, vector<vector<int>>& queries) {
+        
+        int n= nums.size();
+        vector<bool> alt(n-1, 0);
+
+        for(int i= 0; i< n-1; i++)
+            alt[i]= (nums[i] % 2) != (nums[i+1] % 2);
+        
+        vector<int> preSum(n, 0);
+
+        for(int i= 0; i< n-1; i++)
+            preSum[i+1]= preSum[i] + alt[i];
+        
+        vector<bool> result;
+
+        for(auto it: queries)
+        {
+            int st= it[0];
+            int end= it[1];
+
+            if(end - st == 1)
+                result.push_back((nums[st] % 2) != (nums[end] % 2));
+            else if(end - st == 0)
+                result.push_back(true);
+            else
+            {
+                int count= preSum[end] - preSum[st];
+                result.push_back(count == end-st);
+            }
+        }
+
+        return result;
+    }
+};
