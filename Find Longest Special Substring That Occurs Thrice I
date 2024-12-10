@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int maximumLength(string s) {
+
+        int n= s.length();
+        unordered_map<string, int> freqMap;
+
+        // Generate all substrings and count frequencies
+        for (int i = 0; i < n; i++) 
+        {
+            string curr = "";
+            for (int j = i; j < n; j++) 
+            {
+                if(s[j] == s[i])
+                {
+                    curr += s[j];    // Build the substring
+                    freqMap[curr]++; // Increment frequency in the map
+                }
+                else
+                    break;  //stops when substring is no longer special
+            }
+        }
+
+        //finding the longest special subsequence with freq >= 3
+        int maxLen= -1;
+        for(const auto& it: freqMap)
+            if(it.second >= 3)
+                maxLen= max(maxLen, (int)it.first.length());
+
+        return maxLen;
+
+    }
+};
