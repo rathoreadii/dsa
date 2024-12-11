@@ -1,0 +1,48 @@
+int minimumKnightMoves(int x, int y) {
+    
+    //all possiblw moves of a knight
+    const int dx[]= {2, 2, -2, -2, 1, 1, -1, -1};
+    const int dy[]= {1, -1, 1, -1, 2, -2, 2, -2};
+
+    queue<pair<int, int>> q;
+    unordered_set<string> vis;
+
+    q.push({0, 0});
+    vis.insert("0,0");
+    int steps= 0;
+
+    while(!q.empty())
+    {
+        int n= q.size();
+
+        for(int i= 0; i<n; i++)
+        {
+            pair<int, int> curr= q.front();
+            q.pop();
+
+            int X= curr.first;
+            int Y= curr.second;
+
+            if(X == x && Y == y)    //base condition
+                return steps;
+            
+            for(int j= 0; j<8; j++) //checking all the possible moves from current position
+            {
+                int newx= X + dx[j];
+                int newy= Y + dy[j];
+
+                string pos= to_string(newx)+','+to_string(newy);
+                if(vis.find(pos) == vis.end())  //checking and pushing new possible moves 
+                {
+                    q.push({newx, newy});
+                    vis.insert(pos);
+                }
+            }
+        }
+
+        steps++;
+    }
+
+    return -1;
+
+}
