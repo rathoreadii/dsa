@@ -1,0 +1,24 @@
+class Solution {
+public:
+    long long pickGifts(vector<int>& gifts, int k) {
+        
+        priority_queue<int> max(gifts.begin(), gifts.end());
+
+        while(k--)
+        {
+            int top= max.top();
+            max.pop();
+            max.push(floor(sqrt(top)));
+        }
+
+        long long ans= 0;
+        while(max.size())
+        {
+            ans+= max.top();
+            max.pop();
+        }
+
+        return ans;
+
+    }
+};
