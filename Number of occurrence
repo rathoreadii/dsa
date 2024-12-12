@@ -1,0 +1,14 @@
+// } Driver Code Ends
+class Solution {
+  public:
+    int countFreq(vector<int>& arr, int target) {
+        
+        int ans= 0;
+        for(auto i: arr)
+            if(i == target)
+                ans++;
+        
+        return ans;
+        
+    }
+};
