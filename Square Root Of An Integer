@@ -1,0 +1,14 @@
+#include <bits/stdc++.h> 
+int squareRoot(int a)
+{
+	if(a < 0)
+		return 0;
+	
+	int maxInt= sqrt(abs(a));
+	
+	if((maxInt * maxInt) <= a)
+		return maxInt;
+	
+	return maxInt-1;
+
+}
