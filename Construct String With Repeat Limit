@@ -1,0 +1,47 @@
+class Solution {
+public:
+    string repeatLimitedString(string s, int repeatLimit) {
+
+        // frequency map for each alphabet in lexicographically descending order
+
+        map<char, int, greater<>> freq;
+
+        for(char c: s)
+            freq[c]++;
+
+        // create string
+        string repeatLimitedString= "";
+        
+        // use the letter until the limit
+            // use next letter
+            // check if previous letter exists
+                // if yes then use it until the limit else move on to next letter
+        auto it= freq.begin();
+        while(it != freq.end())
+        {
+            char curr= it->first;
+            int currCount= it->second;
+            int useCount= min(repeatLimit, currCount);
+
+            repeatLimitedString.append(useCount, curr);
+            it->second-= useCount;
+
+            if(it->second > 0)
+            {
+                auto nextIt= next(it);
+                if(nextIt == freq.end())
+                    break;
+                
+                repeatLimitedString+= nextIt->first;
+                nextIt->second--;
+
+                if(nextIt->second == 0)
+                    freq.erase(nextIt);
+            }
+            else
+                it++;
+        }
+
+        return repeatLimitedString;
+    }
+};
