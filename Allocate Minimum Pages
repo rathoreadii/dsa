@@ -1,0 +1,68 @@
+class Solution {
+  private:
+    int getMaxPage(vector<int>& arr)
+    {
+        int maxPg= INT_MIN;
+        for(auto i: arr)
+            maxPg= max(maxPg, i);
+        return maxPg;
+    }
+    
+    int totalPages(vector<int>& arr)
+    {
+        int totalPg= 0;
+        for(auto i: arr)
+            totalPg+= i;
+        return totalPg;
+    }
+    
+    bool possible(vector<int>& arr, int k, int mid)
+    {
+        int stds= 1;
+        int pgs= 0;
+        
+        for(int i= 0; i < arr.size(); i++)
+        {
+            if(pgs + arr[i] > mid)
+            {
+                stds++;
+                pgs= arr[i];
+                
+                if(stds > k)
+                    return false;
+            }
+            else
+                pgs+= arr[i];
+        }
+        
+        return true;
+    }
+    
+  public:
+    int findPages(vector<int> &arr, int k) {
+        
+        if(arr.size() < k)
+            return -1;
+
+        int left= getMaxPage(arr);
+        int right= totalPages(arr);
+        
+        int ans;
+        
+        while(left <= right)
+        {
+            int mid= (left + right) / 2;
+            
+            if(possible(arr, k, mid))
+            {
+                ans= mid;
+                right= mid - 1;
+            }
+            else
+                left= mid + 1;
+        }
+        
+        return ans;
+        
+    }
+};
