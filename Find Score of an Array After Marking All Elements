@@ -1,0 +1,37 @@
+class Solution {
+public:
+    long long findScore(vector<int>& nums) {
+        
+        long long score= 0;
+        vector<int> vis(nums.size(), false);
+
+        // priority heap to handle the elements based on the ascending sorting and index
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+
+        for(int i= 0; i< nums.size(); i++)
+            minHeap.push({nums[i], i});
+        
+        // calculating score
+        while(minHeap.size())
+        {
+            int small= minHeap.top().first;
+            int ind= minHeap.top().second;
+            minHeap.pop();
+            
+            if(vis[ind])
+                continue;
+            
+            score+= nums[ind];
+
+            // marking visited according to the condition
+            vis[ind]= true;
+            if(ind - 1 >= 0)
+                vis[ind - 1]= true;
+            if(ind + 1 < nums.size())
+                vis[ind + 1]= true;
+        }
+
+        return score;
+        
+    }
+};
