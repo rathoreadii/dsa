@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+
+bool isInt(string &s, int st, int end)
+{
+	if(st > end)
+		return false;
+	
+	if(s[st] == '+' || s[st] == '-')
+		st++;
+	if(st > end)
+		return false;
+	
+	for(int i= st; i<= end; i++)
+		if(!isdigit(s[i]))
+			return false;
+	
+	return true;
+}
+
+bool isDec(string &s, int st, int end)
+{
+	bool dot= false, dig= false;
+
+	if(st > end)
+		return false;
+	
+	while(s[st] == '+' || s[st] == '-')
+		st++;
+	if(st > end)	
+		return false;
+	
+	for(int i= st; i<= end; i++)
+	{
+		if(s[i] == '.')
+		{
+			if(dot)
+				return false;
+			dot= true;
+		}
+		else if(isdigit(s[i]))
+			dig= true;
+		else
+			return false;
+	}
+
+	return dot && dig;
+}
+
+string isValidNumber(string &s) {
+
+	int n= s.size();
+	int eInd= -1;
+
+	int st= 0, end= n-1;
+	while(st <= end && s[st] == ' ')
+		st++;
+	while(st <= end && s[end] == ' ')
+		end--;
+	if(st > end)
+		return "Invalid";
+	
+	for(int i= st; i<= end; i++)
+	{
+		if(s[i] == 'e' || s[i] == 'E')
+		{
+			if(eInd != -1)
+				return "Invalid";
+			eInd= i;
+		}
+	}
+
+	if(eInd == -1)
+		return (isDec(s, st, end) || isInt(s, st, end)) ? "Valid" : "Invalid";
+	else
+		return ((isDec(s, st, eInd-1) || isInt(s, st, eInd-1)) && isInt(s, eInd+1, end)) ? "Valid" : "Invalid";
+
+}
