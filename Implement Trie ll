@@ -1,0 +1,97 @@
+#include <bits/stdc++.h> 
+class Trie{
+    private:
+
+    struct TrieNode
+    {
+        unordered_map<char, TrieNode*> children;
+        int wordCnt;
+        int preWord;
+        TrieNode()
+        {
+            wordCnt= 0;
+            preWord= 0;
+        }
+    };
+
+    TrieNode* root;
+
+    public:
+
+    Trie(){
+        root= new TrieNode();
+    }
+
+    void insert(string &word){
+        
+        TrieNode* currNode= root;
+
+        for(char c: word)
+        {
+            if(!currNode->children.count(c))    //checking if trie has a word with similar chars.
+                currNode->children[c]= new TrieNode();
+            
+            currNode= currNode->children[c];
+            currNode->preWord++;
+        }
+
+        currNode->wordCnt++;
+
+    }
+
+    int countWordsEqualTo(string &word){
+        
+        TrieNode* currNode= root;
+
+        for(char c: word)
+        {
+            if(!currNode->children.count(c))
+                return 0; //word doesnt exist in this trie.
+            
+            currNode= currNode->children[c];
+        }
+
+        return currNode->wordCnt; //returning no. of words ending at this node.
+
+    }
+
+    int countWordsStartingWith(string &word){
+
+        TrieNode* currNode= root;
+
+        for(char c: word)
+        {
+            if(!currNode->children.count(c))
+                return 0; //this word is not the prefix in this trie.
+            
+            currNode= currNode->children[c];
+        }
+
+        return currNode->preWord; // returning tkhe no. of words with this prefix in this trie.
+
+    }
+
+    void erase(string &word){
+        
+        if(countWordsEqualTo(word) == 0) // word doesnt exist
+            return;
+        
+        TrieNode* currNode= root;
+        for(char c: word)
+        {
+            TrieNode* Node= currNode->children[c];
+            Node->preWord--;    //decrement prefix count as the word is being deleted
+
+            if(Node->preWord == 0)
+            {
+                currNode->children.erase(c);    //erase the node if no word uses this as a prefix
+                return;
+            }
+            
+            currNode= Node;
+        }
+
+        currNode->wordCnt--; //decrementing the word count after deleting.
+
+    }
+};
