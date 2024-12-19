@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    int kthMissing(vector<int> &arr, int k) {
+        
+        // checking if the kth number exists before the array element range
+        if(k < arr[0])
+            return k;
+        
+        int missNos= arr[0] - 1; // to count all missing numbers
+        
+        for(int i= 0; i< arr.size() - 1; i++)
+        {
+            int currCnt= arr[i+1] - arr[i] - 1; // to count missing numbers between to consecutive elements
+            missNos+= currCnt;
+            
+            if(missNos >= k)
+                return arr[i] + (k - (missNos - currCnt));
+        }
+        
+        return arr[arr.size() - 1 ] + (k - missNos); // missing number is out of the bound of the element range
+        
+    }
+};
