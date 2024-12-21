@@ -1,0 +1,40 @@
+class Solution {
+private:
+    void dfsSearchCompo(int node, int parent, vector<int>& values, int k, vector<vector<int>>& adjTree, vector<long long>& subTreeSum, vector<int>& compo)
+    {
+        subTreeSum[node]= values[node];
+
+        for(auto neighbours: adjTree[node])
+        {
+            if(neighbours == parent)
+                continue;
+            
+            dfsSearchCompo(neighbours, node, values, k, adjTree, subTreeSum, compo);
+
+            subTreeSum[node]+= subTreeSum[neighbours];
+            compo[node]+= compo[neighbours];
+        }
+
+        if(subTreeSum[node] % k == 0)
+            compo[node]++;
+        
+    }
+
+public:
+
+    int maxKDivisibleComponents(int n, vector<vector<int>>& edges, vector<int>& values, int k) { 
+        vector<vector<int>> adjTree(n);
+        for(auto edge: edges)
+        {
+            adjTree[edge[0]].push_back(edge[1]);
+            adjTree[edge[1]].push_back(edge[0]);
+        }
+
+        vector<int> compo(n, 0);
+        vector<long long> subTreeSum(n, 0);
+
+        dfsSearchCompo(0, -1, values, k, adjTree, subTreeSum, compo);
+
+        return compo[0];
+    }
+};
