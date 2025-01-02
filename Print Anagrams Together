@@ -1,0 +1,34 @@
+class Solution {
+  public:
+    vector<vector<string>> anagrams(vector<string>& arr) {
+        
+        unordered_map<string, vector<string>> anaGrp;
+        vector<string> keyOrder;
+        
+        for(const auto& str: arr)
+        {
+            
+            // freq key for each word
+            vector<int> charC(26, 0);
+            for(char c: str)
+                charC[c - 'a']++;
+            
+            // key generation
+            string key;
+            for(int i: charC)
+                key+= to_string(i) + '-';
+            
+            // new key allotment
+            if(anaGrp.find(key) == anaGrp.end())
+                keyOrder.push_back(key);
+            
+            anaGrp[key].push_back(str);
+        }
+        
+        vector<vector<string>> result;
+        for(const string& key: keyOrder)
+            result.push_back(anaGrp[key]);
+        
+        return result;
+    }
+};
