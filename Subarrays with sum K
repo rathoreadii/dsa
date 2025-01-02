@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    int countSubarrays(vector<int> &arr, int k) {
+        
+        unordered_map<int, int> preSumFound;
+        preSumFound[0]= 1;
+        
+        int preSum= 0;
+        int cnt= 0;
+        
+        for(int i: arr)
+        {
+            preSum+= i;
+            
+            if(preSumFound.find(preSum - k) != preSumFound.end())
+                cnt+= preSumFound[preSum - k];
+            
+            preSumFound[preSum]++;
+        }
+        
+        return cnt;
+    }
+};
