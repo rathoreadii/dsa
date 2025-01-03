@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+
+int threePointer(vector<int>& X, vector<int>& Y, vector<int>& Z)
+{   
+    int i= 0;
+    int j= 0;
+    int k= 0;
+    int ans= INT_MAX;
+
+    while((i< X.size()) && (j < Y.size()) && (k< Z.size()))
+    {
+        int xi= X[i];
+        int yj= Y[j];
+        int zk= Z[k];
+
+        int currMaxDiff= max({abs(xi - yj), abs(yj - zk), abs(zk - xi)});
+
+        ans= min(ans, currMaxDiff);
+
+        if((xi <= yj) && (xi <= zk))
+            i++;
+        else if ((yj <= xi) && (yj <= zk))
+            j++;
+        else
+            k++;
+    }
+
+    return ans;
+}
