@@ -1,0 +1,25 @@
+class Solution {
+  public:
+    int countPairs(vector<int> &arr, int target) {
+        
+        int n= arr.size();
+        sort(arr.begin(), arr.end());
+        int l= 0; 
+        int r= n-1;
+        int cnt= 0;
+        
+        while(l < r)
+        {
+            if(arr[l] + arr[r] < target)
+            {
+                cnt+= (r-l);
+                l++;
+            }
+            else
+                r--;
+        }
+        
+        return cnt;
+        
+    }
+};
