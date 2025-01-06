@@ -1,0 +1,43 @@
+#include <bits/stdc++.h> 
+
+string stringToBinary(long long n)
+{
+    if(n == 0)
+        return "0";
+    
+    string bi= "";
+    while(n > 0)
+    {
+        bi= char((n % 2) + '0') + bi;
+        n/= 2;
+    }
+    
+    return bi;
+}
+
+int conversion(int N, int M)
+{
+    
+    string nb= stringToBinary(N);
+    string mb= stringToBinary(M);
+    int cnt= 0;
+
+    int ns= nb.length();
+    int ms= mb.length();
+
+    if(ns < ms)
+        nb.insert(0, ms-ns, '0');
+    else
+        mb.insert(0, ns-ms, '0');
+    
+    int m= max(ns, ms);
+
+    for(int i= 0; i< m; i++)
+    {
+        if(nb[i] != mb[i])
+            cnt++;
+    }
+
+    return cnt;
+
+}
