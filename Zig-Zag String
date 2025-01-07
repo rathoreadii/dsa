@@ -1,0 +1,27 @@
+#include <bits/stdc++.h> 
+string zigZagString(string str, int n, int m) {
+    
+    if(m == 1)
+        return str;
+    
+    vector<string> r(m);
+    bool flag= false;
+    int curRow= 0;
+
+    for(int i= 0; i< n; i++)
+    {
+        r[curRow]+= str[i];
+
+        if(curRow == 0 || curRow == m-1)
+            flag= !flag;
+        
+        curRow+= (flag ? 1: -1);
+    }
+
+    string ans= "";
+    for(const string& er: r)
+        ans+= er;
+    
+    return ans;
+
+}
