@@ -1,0 +1,22 @@
+int countPairs(vector<int> &arr, int target) {
+        
+        unordered_map<int, int> freq;
+        
+        for(int i: arr)
+            freq[i]++;
+        
+        int cnt= 0;
+        for(int i: arr)
+        {
+            int com= target - i;
+            
+            if(freq.find(com) != freq.end())
+            {
+                cnt+= freq[com];
+                if(com == i)
+                    cnt--;
+            }
+        }
+        
+        return cnt/2;
+    }
