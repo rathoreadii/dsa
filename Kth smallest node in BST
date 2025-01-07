@@ -1,0 +1,21 @@
+int solve(TreeNode<int> *root, int& k)
+{
+    if(root == nullptr)
+        return -1;
+    
+    int l= solve(root->left, k);
+    if(l != -1)
+        return l;
+    
+    k--;
+    if(k == 0)
+        return root->data;
+    
+    return solve(root->right, k);
+}
+
+
+int kthSmallest(TreeNode<int> *root, int k)
+{
+    return solve(root, k);
+}
