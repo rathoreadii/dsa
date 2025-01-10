@@ -1,0 +1,15 @@
+int Solution::maxSubArray(const vector<int> &A) {
+    int max= INT_MIN, curmax= 0;
+    
+    for(int i=0; i<A.size(); i++)
+    {
+        curmax += A[i];
+        if(max < curmax)
+            max= curmax;
+        
+        if(curmax < 0)
+            curmax= 0;
+    }
+    
+    return max;
+}
