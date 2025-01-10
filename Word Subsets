@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
+        
+        vector<string> ans;
+
+        // freq count for words2
+        vector<int> reqFreq(26, 0);
+        for(const string& b: words2)
+        {
+            vector<int> bFreq(26, 0);
+            for(char ch: b)
+                bFreq[ch - 'a']++;
+            
+            // minimum freq required to be present in the word for being universal string
+            for(int i= 0; i< 26; i++)
+                reqFreq[i]= max(reqFreq[i], bFreq[i]);
+        }
+
+        // check each word for universal condition
+        for(const string& a: words1)
+        {
+            // freq of each word for checking against the condition for universal
+            vector<int> aFreq(26, 0);
+            for(char ch: a)
+                aFreq[ch - 'a']++;
+            
+            // universal condition check
+            bool flag= true;
+            for(int i= 0; i< 26; i++)
+            {
+                if(aFreq[i] < reqFreq[i])
+                {
+                    flag= false;
+                    break;
+                }
+            }
+
+            if(flag)
+                ans.push_back(a);
+        }
+
+        return ans;
+    }
+};
