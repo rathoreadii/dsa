@@ -1,0 +1,15 @@
+vector<int> Solution::findPerm(const string A, int B) {
+    vector<int> v;
+    int i= 1;
+    int j= B;
+    
+    for(auto it: A)
+    {
+        if(it == 'I')
+            v.push_back(i++);
+        else
+            v.push_back(j--);
+    }
+    v.push_back(j);
+    return v;
+}
