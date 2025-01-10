@@ -1,0 +1,32 @@
+void solve(vector<int> &A, int i, vector<int>& curr, set<vector<int>>& subset)
+{
+    int n= A.size();
+    
+    // base case
+    if(i == n)
+    {
+        subset.insert(curr);
+        return;
+    }
+    
+    // excluding current int
+    solve(A, i+1, curr, subset);
+    
+    // including current int
+    curr.push_back(A[i]);
+    solve(A, i+1, curr, subset);
+    curr.pop_back();    // backtrack
+}
+
+vector<vector<int> > Solution::subsets(vector<int> &A) {
+    
+    set<vector<int>> subset;
+    vector<int> curr;
+    sort(A.begin(), A.end());
+    
+    solve(A, 0, curr, subset);
+    
+    vector<vector<int>> ans(subset.begin(), subset.end());
+    
+    return ans;
+}
