@@ -1,0 +1,35 @@
+    void solve(vector<int>& A, int B, int ind, vector<int>& curr, vector<vector<int>>& ans, int sum)
+    {
+        // base case
+        if(sum == B)
+        {
+            ans.push_back(curr);
+            return;
+        }
+        
+        if(sum > B || ind >= A.size())
+            return;
+        
+       for(int i= ind; i< A.size(); i++)
+       {
+           // skip duplicate elements
+            if(i > ind && A[i] == A[i-1])
+                continue;
+            
+            curr.push_back(A[i]);
+            solve(A, B, i, curr, ans, sum+A[i]);
+            curr.pop_back();    // backtrack
+       }
+    }
+
+
+    vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+        
+        vector<vector<int>> ans;
+        vector<int> curr;
+        sort(A.begin(), A.end());
+        
+        solve(A, B, 0, curr, ans, 0);
+        
+        return ans;
+    }
