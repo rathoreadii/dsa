@@ -1,0 +1,25 @@
+int Solution::solve(int A, vector<int> &B) {
+    
+    int pre[A];
+    pre[0]= B[0];
+    for(int i=1; i<A; i++)
+        pre[i]= pre[i-1] + B[i];
+    
+    if(pre[A-1]%3)
+        return 0;
+    
+    int req= pre[A-1]/3;
+    int cnt= 0;
+    int ans= 0;
+    
+    for(int i=0; i<A-1; i++)
+    {
+        if(pre[i] == 2*req)
+            ans+= cnt;
+        
+        cnt+=(pre[i] ==req);
+    }
+    
+    return ans;
+    
+}
