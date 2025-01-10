@@ -1,0 +1,32 @@
+void solve(vector<string> &A, int i, string& curr, vector<string> &result)
+{
+    int n= A.size();
+    
+    // base case
+    if(curr.length() == n)
+    {
+        result.push_back(curr);
+        return;
+    }
+    
+    // iterating each char from each words
+    for(char c: A[i])
+    {
+        curr.push_back(c);
+        solve(A, i+1, curr, result);    // recursive call
+        curr.pop_back();    // backtrack
+    }
+}
+
+vector<string> Solution::specialStrings(vector<string> &A) {
+    
+    vector<string> result;
+    string curr;
+    
+    solve(A, 0, curr, result);
+    
+    // sortinig for lexicographic order
+    sort(result.begin(), result.end());
+    
+    return result;
+}
