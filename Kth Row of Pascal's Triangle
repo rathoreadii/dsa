@@ -1,0 +1,33 @@
+vector<int> Solution::getRow(int A) {
+    
+    vector<int> ans;
+    ans.push_back(1);
+    ans.push_back(1);
+    
+    vector<int> req;
+    req.push_back(1);
+    
+    if(A==0)
+        return req;
+    
+    if(A==1)
+    {
+        req.push_back(1);
+        return req;
+    }
+    
+    for(int i=1; i<A; i++)
+    {
+        for(int j=1; j<=i; j++)
+        {
+            req.push_back(ans[j]+ans[j-1]);
+        }
+        req.push_back(1);
+        ans= req;
+        req.clear();
+        req.push_back(1);
+    }
+    
+    return ans;
+    
+}
