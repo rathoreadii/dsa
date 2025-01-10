@@ -1,0 +1,26 @@
+int Solution::solve(vector<int> &A) {
+    
+    int n= A.size();
+    vector<int> v(n);
+    for(int i=n-1; i>=0; i--)
+    {
+        if(i==n-1)
+            v[i]= A[i];
+        else
+            v[i]= max(v[i+1], A[i]);
+    }
+    
+    set<int> s;
+    s.insert(A[0]);
+    int ans= 0;
+    
+    for(int i=1; i<n; i++)
+    {
+        s.insert(A[i]);
+        auto it= s.find(A[i]);
+        
+        if(it != s.begin() && v[i] != A[i])
+            ans= max(ans, (*--it) + A[i] + v[i]);
+    }
+    return ans;
+}
