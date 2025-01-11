@@ -1,0 +1,51 @@
+#define pp pair< string , int >
+
+vector<string> Solution::reorderLogs(vector<string> &s) {
+   
+    vector<int> dig;
+   
+    set< pp > st;
+   
+    int j=0;
+   
+    for(auto x : s)
+    {
+        string str="";
+       
+        int i=0;
+       
+        while(x[i]!='-')
+        {
+            str.push_back(x[i]);
+            i++;
+        }
+       
+        if(x[i+1]>='a' && x[i+1]<='z')
+        {
+            st.insert({x.substr(i+1) + str , j});
+        }
+        else
+        {
+            dig.push_back(j);
+        }
+       
+        j++;
+    }
+   
+    vector<string > res;
+   
+    for(auto x : st)
+    {
+        res.push_back(s[x.second]);
+    }
+   
+    for(auto x : dig)
+    {
+        res.push_back(s[x]);
+    }
+   
+    return res;
+   
+}
+
+
