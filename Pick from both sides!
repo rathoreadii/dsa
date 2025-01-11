@@ -1,0 +1,21 @@
+int Solution::solve(vector<int> &A, int B) {
+    
+    int n= A.size();
+    int currSum= 0;
+    int maxSum= 0;
+    
+    for(int i= 0; i< B; i++)
+        currSum+= A[i];
+    
+    maxSum= currSum;
+    
+    for(int i= 1; i<= B; i++)
+    {
+        currSum-= A[B-i];
+        currSum+= A[n-i];
+        maxSum= max(maxSum, currSum);
+    }
+    
+    return maxSum;
+    
+}
