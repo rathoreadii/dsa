@@ -1,0 +1,50 @@
+vector<int> Solution::spiralOrder(const vector<vector<int> > &A) {
+    
+    int row= A.size();
+    if(row == 0)
+        return {};
+    
+    int col= A[0].size();
+    
+    vector<int> result;
+    int top= 0;
+    int btm= row- 1;
+    int lft= 0;
+    int rgt= col- 1;
+    
+    // traversing until the boundaries meet
+    while(top <= btm && lft <= rgt)
+    {
+        // right
+        for(int i= lft; i<= rgt; i++)
+            result.push_back(A[top][i]);
+        
+        top++;
+        
+        // down
+        for(int i= top; i<= btm; i++)
+            result.push_back(A[i][rgt]);
+        
+        rgt--;
+        
+        // left
+        if(top <= btm)
+        {
+            for(int i= rgt; i>= lft; i--)
+            result.push_back(A[btm][i]);
+        
+            btm--;
+        }
+        
+        //up
+        if(lft <= rgt)
+        {
+            for(int i= btm; i>= top; i--)
+                result.push_back(A[i][lft]);
+            
+            lft++;
+        }
+    }
+    
+    return result;
+}
