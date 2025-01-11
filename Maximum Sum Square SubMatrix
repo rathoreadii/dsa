@@ -1,0 +1,23 @@
+int Solution::solve(vector<vector<int> > &A, int B) {
+    int n = A.size();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            if(j-1>=0) A[i][j] += A[i][j-1];
+            if(i-1>=0) A[i][j] += A[i-1][j];
+            if(i-1>=0 && j-1>=0) A[i][j] -= A[i-1][j-1];
+        }
+    }
+
+    int ans = INT_MIN;
+    for(int i=B-1; i<n; i++){
+        for(int j=B-1; j<n; j++){
+            int local = A[i][j];
+            if(i-B>=0)local -= A[i-B][j];
+            if(j-B>=0)local -= A[i][j-B];
+            if(i-B>=0 && j-B>=0)local += A[i-B][j-B];
+            ans = max(ans, local);
+        }
+    }
+    return ans;
+}
