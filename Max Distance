@@ -1,0 +1,24 @@
+int Solution::maximumGap(const vector<int> &A) {
+    
+    int n= A.size();
+    int maxd= 0;
+    int minp= INT_MAX;
+    
+    vector<pair<int, int>> v;
+    
+    for(int i=0; i<n; i++)
+        v.emplace_back(make_pair(A[i], i));
+    
+    sort(v.begin(), v.end());
+    minp= v[0].second;
+    
+    for(int i= 1; i<n; i++)
+    {
+        if(v[i].second > minp)
+            maxd= max(maxd, (v[i].second - minp));
+        
+        minp= min(minp, v[i].second);
+    }    
+    
+    return maxd;
+}
