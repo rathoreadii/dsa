@@ -1,0 +1,42 @@
+vector<int> Solution::maxset(vector<int> &A) {
+    
+    int n= A.size();
+    
+    long long maxSum= -1;
+    long long currSum= 0;
+    int start= 0;
+    int end= 0;
+    int currStart= 0;
+    
+    vector<int> ans;
+    
+    for(int i= 0; i<n; i++)
+    {
+        if(A[i] >= 0)
+        {
+            currSum+= A[i];
+            
+            if(currSum > maxSum || (currSum == maxSum && (i - currStart > end - start)))
+            {
+                maxSum= currSum;
+                start= currStart;
+                end= i;
+            }
+        }
+        else
+        {
+            currSum= 0;
+            currStart= i+1;
+        }
+    }
+    
+    if(maxSum == -1)
+        return {};
+    
+    for(int i= start; i<= end; i++)
+        ans.push_back(A[i]);
+    
+    
+    return ans;    
+    
+}
