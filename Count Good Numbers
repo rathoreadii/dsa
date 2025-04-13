@@ -1,0 +1,30 @@
+class Solution {
+public:
+    long long help(long long base, long long exp, long long MOD)
+    {
+        long long result= 1;
+        base%= MOD;
+
+        while(exp > 0)
+        {
+            if(exp % 2 == 1)
+                result= (result * base) % MOD;
+            base= (base * base) % MOD;
+            exp/= 2;
+        }
+
+        return result % MOD;
+    }
+
+    int countGoodNumbers(long long n) {
+        
+        long long evePosi= (n+1)/2;
+        long long oddPosi= n/2;
+
+        long long evePart= help(5, evePosi, 1e9 + 7);
+        long long oddPart= help(4, oddPosi, 1e9 + 7);
+
+        return (evePart * oddPart) % (int)(1e9 + 7);
+
+    }
+};
