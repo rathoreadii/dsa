@@ -1,0 +1,30 @@
+class Solution {
+public:
+    long long countGood(vector<int>& nums, int k) {
+        
+        unordered_map<int, int> freq;
+        int pairCnt= 0;
+        int l= 0;
+        long long ans= 0;
+        int n= nums.size();
+
+        for(int r= 0; r< n; r++)
+        {
+            int val= nums[r];
+            int currFreq= freq[val];
+            pairCnt+= currFreq;
+            freq[val]++;
+
+            while(pairCnt >= k)
+            {
+                ans+= n - r;
+                int valL= nums[l];
+                freq[valL]--;
+                pairCnt-= freq[valL];
+                l++;
+            }
+        }
+        
+        return ans;
+    }
+};
