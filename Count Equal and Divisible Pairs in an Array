@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int countPairs(vector<int>& nums, int k) {
+        
+        unordered_map<int, vector<int>> indList;
+        for(int i= 0; i< nums.size(); i++)
+            indList[nums[i]].push_back(i);
+        
+        int ans= 0;
+        for(auto& [val, ind]: indList)
+        {
+            int s= ind.size();
+            for(int i= 0; i< s; i++)
+                for(int j= i+1; j< s; j++)
+                    if((ind[i]*ind[j]) % k == 0)
+                        ans++;
+        }
+
+        return ans;
+    }
+};
