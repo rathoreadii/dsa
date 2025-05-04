@@ -1,0 +1,33 @@
+class Solution {
+private:
+    bool isPenalty(vector<int>& nums, int maxOperations, int penalty)
+    {
+        long long ops= 0;
+        for(int n: nums)
+            ops+= (n - 1) / penalty;
+        
+        return ops <= maxOperations;
+    }
+
+public:
+    int minimumSize(vector<int>& nums, int maxOperations) {
+        int l= 1; 
+        int r= *max_element(nums.begin(), nums.end());
+        int ans= r;
+
+        while(l <= r)
+        {
+            int m= l + (r-l) / 2;
+
+            if(isPenalty(nums, maxOperations, m))
+            {
+                ans= m;
+                r= m-1;
+            }
+            else
+                l= m+1;
+        }
+
+        return ans;
+    }
+};
