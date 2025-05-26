@@ -1,0 +1,26 @@
+vector<int> Solution::plusOne(vector<int> &A) {
+    
+    int n= A.size();
+    int carry= 1;
+    
+    for(int i= n-1; i>= 0; i--)
+    {
+        int sum= A[i] + carry;
+        A[i]= sum % 10;
+        carry= sum / 10;
+        
+        if(carry == 0)
+            break;
+    }
+    
+    if(carry)
+        A.insert(A.begin(), carry);
+    
+    int st= 0;
+    while(st < n && A[st] == 0)
+        st++;
+    
+    vector<int> res(A.begin() + st, A.end());
+    return res;
+    
+}
