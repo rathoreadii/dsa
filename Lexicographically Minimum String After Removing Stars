@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string clearStars(string s) {
+        
+        vector<char> stack;
+        multiset<char> sorted;
+        unordered_map<char, vector<int>> charInd;
+
+        for(char c: s)
+        {
+            if(c == '*')
+            {
+                if(!sorted.empty())
+                {
+                    char minchar= *sorted.begin();
+                    sorted.erase(sorted.begin());
+
+                    int ind= charInd[minchar].back();
+                    charInd[minchar].pop_back();
+                    stack[ind]= '#';
+                }
+            }
+            else
+            {
+                charInd[c].push_back(stack.size());
+                stack.push_back(c);
+                sorted.insert(c);
+            }
+        }
+
+        string res;
+        for(char c: stack)
+            if(c != '#')
+                res+= c;
+        
+        return res;
+
+    }
+};
