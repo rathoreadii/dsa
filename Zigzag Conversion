@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows == 1 || s.length() <= numRows)
+            return s;
+        
+        vector<string> rows(min(numRows, int(s.length())));
+        int curRow= 0;
+        bool flag= false;
+
+        for(char c: s)
+        {
+            rows[curRow]+= c;
+
+            if(curRow == 0 || curRow == numRows-1)
+                flag= !flag;
+            
+            curRow+= flag? 1 : -1;
+        }
+
+        string result;
+        for(string row : rows)
+            result+= row;
+        
+        return result;
+    }
+};
