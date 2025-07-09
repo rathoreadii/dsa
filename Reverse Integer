@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int reverse(int x) {
+        long long res= 0;
+
+        while(x)
+        {
+            int d= x % 10;
+            res= (res * 10) + d;
+            x/= 10;
+        
+            if(res > INT32_MAX || res < INT32_MIN)
+                return 0;
+        }
+
+        return static_cast<int>(res);
+    }
+};
