@@ -1,0 +1,24 @@
+class Solution {
+    void choices(vector<string>& res, string curr, int op, int cl, int n){
+        if(op == n && cl == n){
+            res.push_back(curr);
+            return;
+        }
+
+        if(op < n){
+            choices(res, curr + '(', op + 1, cl, n);
+        }
+
+        if(cl < op){
+            choices(res, curr + ')', op, cl + 1, n);
+        }
+    }
+
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        string curr;
+        choices(res, curr, 0, 0, n);
+        return res;
+    }
+};
