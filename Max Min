@@ -1,0 +1,23 @@
+int Solution::solve(vector<int> &A) {
+    int n= A.size();
+    int lt= 0;
+    int rt= n-1;
+    int globalMin= INT_MAX;
+    int globalMax= INT_MIN;
+    
+    while(lt <= rt){
+        if(A[lt] < globalMin)
+            globalMin= A[lt];
+        if(A[lt] > globalMax)
+            globalMax= A[lt];
+        if(A[rt] < globalMin)
+            globalMin= A[rt];
+        if(A[rt] > globalMax)
+            globalMax= A[rt];
+        
+        lt++;
+        rt--;
+    }
+    
+    return globalMax+globalMin;
+}
