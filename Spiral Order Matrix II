@@ -1,0 +1,31 @@
+vector<vector<int> > Solution::generateMatrix(int A) {
+    int n= A*A;
+    vector<vector<int>> res(A, vector<int>(A));
+    int tp= 0, bt= A-1, lt= 0, rt= A-1;
+    int num= 1;
+    
+    while(tp<=bt && lt<=rt){
+        for(int i= lt; i<= rt; i++)
+            res[tp][i] = num++;    
+        tp++;
+        
+        for(int i= tp; i<= bt; i++)
+            res[i][rt] = num++;
+        rt--;
+        
+        if(tp <= bt){
+            for(int i= rt; i>= lt; i--)
+                res[bt][i] = num++; 
+            bt--;
+        }
+        
+        if(lt <= rt){
+            for(int i= bt; i>= tp; i--)
+                res[i][lt] = num++;
+            lt++;
+        }
+    }
+    
+    return res;
+    
+}
