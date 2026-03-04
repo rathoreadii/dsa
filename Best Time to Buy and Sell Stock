@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int lowest= INT_MAX;
+        int maxProfit = 0;
+
+        for(auto p: prices){
+            lowest= min(p, lowest);           
+            int profit= p - lowest;
+            maxProfit= max(maxProfit, profit);
+        }
+
+        return maxProfit;
+    }
+};
