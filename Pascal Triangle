@@ -1,0 +1,15 @@
+vector<vector<int> > Solution::solve(int A) {
+    vector<vector<int>> res;
+    for(int r= 0; r< A; r++){
+        vector<int> curr(r+1);
+        curr[0]= 1;
+        curr[r]= 1;
+        
+        for(int c= 1; c< r; c++)
+            curr[c]= res[r-1][c-1] + res[r-1][c];
+        
+        res.push_back(curr);
+    }
+    
+    return res;
+}
