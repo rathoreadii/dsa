@@ -1,0 +1,32 @@
+int Solution::solve(vector<int> &A) {
+    int n= A.size();
+    int tEven= 0, tOdd= 0;
+    
+    for(int i= 0; i< n; i++){
+        if(i % 2 == 0)
+            tEven+= A[i];
+        else
+            tOdd+= A[i];
+    }
+    
+    int lEven= 0, lOdd= 0, cnt= 0;
+    for(int i= 0; i< n; i++){
+        if(i % 2 == 0)
+            tEven-= A[i];
+        else
+            tOdd-= A[i];
+        
+        int newEven= lEven + tOdd;
+        int newOdd= lOdd + tEven;
+        
+        if(newEven == newOdd)
+            cnt++;
+        
+        if(i % 2 == 0)
+            lEven+= A[i];
+        else
+            lOdd+= A[i];
+    }
+    
+    return cnt;
+}
