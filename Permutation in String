@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        if(s1.length() > s2.length())
+            return false;
+
+        vector<int> f(26, 0);
+        vector<int> cf(26, 0);
+
+        for(char c: s1)
+            f[c - 'a']++;
+        
+        int w= s1.length();
+        for(int i= 0; i< s2.length(); i++){
+            cf[s2[i] - 'a']++;
+
+            if(i >= w)
+                cf[s2[i-w] - 'a']--;
+            
+            if(f == cf)
+                return true;
+        }
+
+        return false;
+    }
+};
