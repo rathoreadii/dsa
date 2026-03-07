@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        vector<int> f(26, 0);
+        int l= 0;
+        int maxLen= 0, maxF= 0;
+
+        for(int r= 0; r< s.length(); r++){
+            f[s[r] - 'A']++;
+            maxF= max(maxF, f[s[r] - 'A']);
+            int windowSize= r - l + 1;
+
+            if(windowSize - maxF > k){
+                f[s[l] - 'A']--;
+                l++;
+            }
+
+            maxLen= max(maxLen, r - l + 1);
+        }
+
+        return maxLen;
+    }
+};
