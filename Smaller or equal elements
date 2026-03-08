@@ -1,0 +1,15 @@
+int Solution::solve(vector<int> &A, int B) {
+    int l= 0, r= A.size()-1;
+    int ans= -1;
+    
+    while(l <= r){
+        int m= l+(r-l)/2;
+        if(A[m] <= B){
+            ans= m;
+            l= m+1;
+        }
+        else
+            r= m-1;
+    }
+    return ans+1;
+}
