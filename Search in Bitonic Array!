@@ -1,0 +1,47 @@
+int peakELe(vector<int> &A){
+    int l= 0, r= A.size()-1;
+    while(l < r){
+        int m= l+(r-l)/2;
+        if(A[m] < A[m+1])
+            l= m+1;
+        else
+            r= m;
+    }
+    
+    return l;
+}
+
+int lftBinSrc(vector<int> &A, int l, int r, int B){
+    while(l <= r){
+        int m= l+(r-l)/2;
+        if(A[m] == B)
+            return m;
+        else if(A[m] > B)
+            r= m-1;
+        else
+            l= m+1;
+    }
+    return -1;
+}
+
+int rgtBinSrc(vector<int> &A, int l, int r, int B){
+    while(l <= r){
+        int m= l+(r-l)/2;
+        if(A[m] == B)
+            return m;
+        else if(A[m] > B)
+            l= m+1;
+        else
+            r= m-1;
+    }
+    return -1;
+}
+int Solution::solve(vector<int> &A, int B) {
+    int peak= peakELe(A);
+    if(B == A[peak])
+        return peak;
+    int lftPart= lftBinSrc(A, 0, peak-1, B);
+    if(lftPart != -1)
+        return lftPart;
+    return rgtBinSrc(A, peak+1, A.size()-1, B);
+}
